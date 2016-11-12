@@ -13,10 +13,8 @@
 
 class Kinematic{
     // Structure for all the kinematic data
-    Vec position;
-    std::double orientation;
-    Vec velocity;
-    std::double rotation;
+    Vec position, velocity;
+    std::double orientation, rotation;
     
     public:
     void update(SteeringOuput &steering, std::double time);
@@ -48,3 +46,20 @@ void getNewOrientation(double &currentOrientation, double &velocity){
         currentOrientation = atan2(-static.x, static.z);
 }
 
+int main(){
+    while(1){
+        do{
+            // Standby
+        } while(signal == 0) {
+        
+            switch(key){
+                case 1:
+                    // Steering
+                case 2:
+                    // Circling
+                case 3:
+                    // Wandering
+            }
+        }
+    }
+}
