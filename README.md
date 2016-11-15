@@ -15,3 +15,4 @@ Tune the free parameters of this control system to meet the following requiremen
 
 Impose these tuning requirements subject to hard constraints on the stability margins of both loops.
 
+Automated Tuning Workflow: https://www.mathworks.com/help/control/ug/automated-tuning-workflows.html
