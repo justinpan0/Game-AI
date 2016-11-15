@@ -10,6 +10,8 @@ The blocks x_1 and x_2 mark analysis-point locations. These are locations at whi
 
 Tune the free parameters of this control system to meet the following requirements:
 
-The output signal, y_1, tracks the reference signal at r with a response time of 5 seconds and a steady-state error of 1%.
-A disturbance injected at x_2 is suppressed at the output, y_1, by a factor of 10.
+1. The output signal, y_1, tracks the reference signal at r with a response time of 5 seconds and a steady-state error of 1%.
+2. A disturbance injected at x_2 is suppressed at the output, y_1, by a factor of 10.
+
 Impose these tuning requirements subject to hard constraints on the stability margins of both loops.
+
