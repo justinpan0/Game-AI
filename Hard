@@ -1,0 +1,54 @@
+G2 = zpk([],-2,3);
+G1 = zpk([],[-1 -1 -1],10);
+
+C20 = tunablePID('C2','pi');
+C10 = tunablePID('C1','pid');
+
+X1 = AnalysisPoint('X1');
+X2 = AnalysisPoint('X2'); 
+
+InnerLoop = feedback(X2*G2*C20,1);
+CL0 = feedback(G1*InnerLoop*C10,X1);
+CL0.InputName = 'r';
+CL0.OutputName = 'y'; 
+
+Rtrack = TuningGoal.Tracking('r','y',5,0.01);
+Rreject = TuningGoal.Gain('X2','y',0.1); 
+
+% The signal at |'y'| tracks the signal at |'r'| with a response time of 5 
+% seconds and a tracking error of 1%
+
+%%
+% TuningGoal.Gain limits the gain from the implicit input
+% associated with the |AnalysisPoint| block |X2| to the output, |'y'|.
+% Limiting this gain to a value less than 1 ensures that a disturbance 
+%injected at |X2| is suppressed at the output.
+
+RmargOut = TuningGoal.Margins('X1',18,60);
+RmargIn = TuningGoal.Margins('X2',18,60);
+RmargIn.Openings = 'X1'; 
+
+% RmargOut imposes a minimum gain margin of 18 dB and a minimum phase
+% margin of 60 degrees. Specifying X1 imposes that requirement on the
+% outer loop. RmargIn imposes on the inner loop, identified by X2. 
+
+SoftReqs = [Rtrack,Rreject];
+HardReqs = [RmargIn,RmargOut];
+[CL,fSoft,gHard] = systune(CL0,SoftReqs,HardReqs); 
+
+% |systune| converts each tuning requirement into a normalized scalar value,
+% _f_ for the soft constraints and _g_ for the hard constraints. The command
+% adjusts the tunable parameters of CL0 to minimize the f values, subject
+% to the constraint that each g < 1. 
+
+viewSpec(HardReqs,CL)    
+stepplot(CL,20)    
+figure;
+viewSpec(Rtrack,CL) 
+
+% The actual tracking error crosses into the shaded area between 1 and 10
+% rad/s, indicating that the requirement is not met in this regime.  Thus,
+% the tuned control system cannot meet the soft tracking requirement, time
+% subject to the hard constraints of the stability margins. To achieve the
+% desired performance, you may need to relax one of your requirements or
+% convert one or more hard constraints to soft constraints.
