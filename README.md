@@ -16,6 +16,9 @@ Tune the free parameters of this control system to meet the following requiremen
 Impose these tuning requirements subject to hard constraints on the stability margins of both loops.
 
 Automated Tuning Workflow: https://www.mathworks.com/help/control/ug/automated-tuning-workflows.html
+
 To use Systune: https://www.mathworks.com/help/slcontrol/ug/systune.html
+
 Performance Robustness Criterion of PID Controllers: http://cdn.intechopen.com/pdfs-wm/34312.pdf
+
 PID Control Intro: https://www.youtube.com/watch?v=UR0hOmjaHp0
