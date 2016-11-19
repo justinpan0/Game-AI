@@ -22,3 +22,5 @@ To use Systune: https://www.mathworks.com/help/slcontrol/ug/systune.html
 Performance Robustness Criterion of PID Controllers: http://cdn.intechopen.com/pdfs-wm/34312.pdf
 
 PID Control Intro: https://www.youtube.com/watch?v=UR0hOmjaHp0
+
+Essay for control of quadcopter: http://sal.aalto.fi/publications/pdf-files/eluu11_public.pdf
